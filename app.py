@@ -78,7 +78,13 @@ with tabs[4]:
 
     gif_path = os.path.join("assets", "ikmal_araci.gif")
     if os.path.exists(gif_path):
-        st.image(Image.open(gif_path), caption="İkmal Aracı Bekliyor...", use_column_width=True)
+        
+    try:
+        with open(gif_path, "rb") as f:
+            st.image(f.read(), caption="İkmal Aracı Bekliyor...", use_column_width=True)
+    except Exception as e:
+        st.warning("⚠️ İkmal aracı görseli açılamadı veya geçersiz. Lütfen geçerli bir .gif dosyası yerleştirin.")
+
     else:
         st.warning("🔍 ikmal_araci.gif bulunamadı. Lütfen assets klasöründe olduğundan emin olun.")
 
